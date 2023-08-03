@@ -72,6 +72,15 @@ export const MiniMap: React.FC<MiniMapProps> = ({
     const scaleY = height / contentSize.height;
     const scale = scaleY > scaleX ? scaleX : scaleY;
 
+    console.log("---------------");
+    console.log(contentSize);
+    console.log(width);
+    console.log(height);
+    console.log(scaleX);
+    console.log(scaleY);
+    console.log(scale);
+    console.log("---------------");
+
     return scale;
   }, [getContentSize, height, width]);
 
@@ -79,6 +88,15 @@ export const MiniMap: React.FC<MiniMapProps> = ({
     const contentSize = getContentSize();
     const scaleX = width / contentSize.width;
     const scaleY = height / contentSize.height;
+
+    console.log("---------------");
+    console.log(contentSize);
+    console.log(width);
+    console.log(height);
+    console.log(scaleX);
+    console.log(scaleY);
+    console.log("---------------");
+
     if (scaleY > scaleX) {
       return { width, height: contentSize.height * scaleX };
     }
@@ -107,11 +125,27 @@ export const MiniMap: React.FC<MiniMapProps> = ({
     computeMiniMapStyle();
     const miniSize = computeMiniMapSize();
     const wrapSize = getContentSize();
+
+    console.log("---------------");
+    console.log(miniSize);
+    console.log(wrapSize);
+    console.log("---------------");
+
     if (wrapperRef.current) {
+      console.log("---------------");
+      console.log(wrapSize.width);
+      console.log(wrapSize.height);
+      console.log("---------------");
+
       wrapperRef.current.style.width = `${wrapSize.width}px`;
       wrapperRef.current.style.height = `${wrapSize.height}px`;
     }
     if (mainRef.current) {
+      console.log("---------------");
+      console.log(miniSize.width);
+      console.log(miniSize.height);
+      console.log("---------------");
+
       mainRef.current.style.width = `${miniSize.width}px`;
       mainRef.current.style.height = `${miniSize.height}px`;
     }
@@ -122,12 +156,26 @@ export const MiniMap: React.FC<MiniMapProps> = ({
       const transform = instance.handleTransformStyles(
         -instance.transformState.positionX * previewScale,
         -instance.transformState.positionY * previewScale,
-        1,
+        0.1,
       );
+
+      console.log("---------------");
+      console.log(size);
+      console.log(scale);
+      console.log(instance.transformState.scale);
+      console.log(previewScale);
+      console.log(transform);
+      console.log("---------------");
 
       previewRef.current.style.transform = transform;
       previewRef.current.style.width = `${size.width * previewScale}px`;
       previewRef.current.style.height = `${size.height * previewScale}px`;
+
+      console.log("---------------");
+      console.log(previewRef.current.style.transform);
+      console.log(previewRef.current.style.width);
+      console.log(previewRef.current.style.height);
+      console.log("---------------");
     }
   };
 
